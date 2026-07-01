@@ -28,11 +28,34 @@
         <main class="main-content">
           <h2 class="welcome">Settings</h2>
 
-          <p>
-            This is where your settings will be. Dark vs Light mode, delete account,
-            save your location so the program doesn't have to ask every time, and more.
-          </p>
+          <!-- Appearance -->
+          <section class="settings-group">
+            <h3 class="settings-group-title">Appearance</h3>
+            <div class="setting-item">
+              <span class="setting-label">Dark Mode</span>
+              <label class="toggle" for="darkModeToggle">
+                <input type="checkbox" id="darkModeToggle">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </section>
+
         </main>
+
+        <script>
+          const $ = id => document.getElementById(id);
+          const save = (k, v) => localStorage.setItem(k, v);
+
+          // Dark Mode
+          const darkToggle = $('darkModeToggle');
+          darkToggle.checked = localStorage.getItem('darkMode') === 'true';
+          document.body.classList.toggle('dark', darkToggle.checked);
+          darkToggle.onchange = () => {
+            document.body.classList.toggle('dark', darkToggle.checked);
+            save('darkMode', darkToggle.checked);
+          };
+
+        </script>
       </div>
     </div>
   </body>
