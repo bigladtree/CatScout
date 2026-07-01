@@ -6,6 +6,7 @@ public class CatListing {
     private String age;
     private String sex;
     private String size;
+    private String color;
     private String sourceShelter;
     private String platform;
     private String sourceUrl;
@@ -56,6 +57,14 @@ public class CatListing {
 
     public void setSize(String size) {
         this.size = size;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor() {
+        this.color = color;
     }
 
     public String getSourceShelter() {
