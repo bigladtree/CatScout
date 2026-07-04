@@ -19,7 +19,6 @@
           <a href="explore.html" class="nav-link">Explore</a>
           <a href="newowners.html" class="nav-link">New Owners</a>
           <a href="saved.html" class="nav-link">Saved</a>
-          <a href="matchmaker.html" class="nav-link">Match</a>
           <a href="settings.html" class="nav-link active">Settings</a>
           <a href="credits.html" class="nav-link">Credits</a>
         </nav>
@@ -28,11 +27,59 @@
         <main class="main-content">
           <h2 class="welcome">Settings</h2>
 
+<<<<<<< Updated upstream
           <p>
             This is where your settings will be. Dark vs Light mode, delete account,
             save your location so the program doesn't have to ask every time, and more.
           </p>
         </main>
+=======
+          <!-- Appearance -->
+          <section class="settings-group">
+            <h3 class="settings-group-title">Appearance</h3>
+            <div class="setting-item">
+              <span class="setting-label">Dark Mode</span>
+              <label class="toggle" for="darkModeToggle">
+                <input type="checkbox" id="darkModeToggle">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class ="setting-item">
+              <span class ="setting-label">Location</span>
+              <input type="text" id="locationInput" class="settings-input" placeholder="Enter Zip Code">
+              <button id="saveLocation" class="settings-btn">Save</button>
+            </div>
+          </section>
+
+        </main>
+
+        <script>
+          const $ = id => document.getElementById(id);
+          const save = (k, v) => localStorage.setItem(k, v);
+
+          // Dark Mode
+          const darkToggle = $('darkModeToggle');
+          darkToggle.checked = localStorage.getItem('darkMode') === 'true';
+          document.body.classList.toggle('dark', darkToggle.checked);
+          darkToggle.onchange = () => {
+            document.body.classList.toggle('dark', darkToggle.checked);
+            save('darkMode', darkToggle.checked);
+          };
+
+          //Location
+          //Checks if a location is already saved. prefills input if yes.
+          const locationInput = $('locationInput');
+          locationInput.value = localStorage.getItem('userLocation') || '';
+
+          //input change/save button hit? change locationInput value.
+          $('saveLocation').onclick = () => {
+            save('userLocation', locationInput.value.trim());
+          };
+
+
+
+        </script>
+>>>>>>> Stashed changes
       </div>
     </div>
   </body>
