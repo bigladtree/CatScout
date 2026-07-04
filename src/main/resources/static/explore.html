@@ -72,13 +72,18 @@
               <option value="bicolor">Bicolor</option>
             </select>
           </div>
+
+          <!-- cat cards grid -->
+          <div id="catGrid" class="cat-grid">
+            <p class="loading-msg">Loading cats...</p>
+          </div>
         </main>
-<<<<<<< Updated upstream
-=======
 
         <script>
           // dark mode check
           if (localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark');
+
+          var allCats = [];
 
           //pull breed list directly from the cat api
           function loadBreeds() {
@@ -90,7 +95,7 @@
                 breedSelect.innerHTML = '<option value="">Any Breed</option>';
                 for (var i = 0; i < breeds.length; i++) {
                   var opt = document.createElement('option');
-                  opt.value = breeds[i].id;
+                  opt.value = breeds[i].name.toLowerCase();
                   opt.textContent = breeds[i].name;
                   breedSelect.appendChild(opt);
                 }
@@ -101,9 +106,54 @@
               });
           }
 
+          // fetch cats from scraper
+          function loadCats() {
+            var grid = document.getElementById('catGrid');
+
+            fetch('/api/cats')
+              .then(function(res) { return res.json(); })
+              .then(function(cats) {
+                allCats = cats;
+                renderCats(cats);
+              })
+              .catch(function(err) {
+                console.error('Could not load cats:', err);
+                grid.innerHTML = '<p>Could not load cats. Make sure the server is running.</p>';
+              });
+          }
+
+          // render cat cards into the grid
+          function renderCats(cats) {
+            var grid = document.getElementById('catGrid');
+
+            if (cats.length === 0) {
+              grid.innerHTML = '<p>No cats match your filters.</p>';
+              return;
+            }
+
+            var html = '';
+            for (var i = 0; i < cats.length; i++) {
+              var cat = cats[i];
+              html += '<div class="cat-card">';
+              if (cat.photoUrl) {
+                html += '<img class="cat-card-img" src="' + cat.photoUrl + '" alt="Photo of ' + cat.name + '">';
+              } else {
+                html += '<div class="cat-card-img-placeholder">No Photo</div>';
+              }
+              html += '<div class="cat-card-info">';
+              html += '<h3 class="cat-card-name">' + cat.name + '</h3>';
+              html += '<p>' + (cat.breed || 'Unknown breed') + '</p>';
+              html += '<p>' + (cat.age || '') + ' &middot; ' + (cat.sex || '') + '</p>';
+              if (cat.adoptionFee) html += '<p>Fee: ' + cat.adoptionFee + '</p>';
+              if (cat.sourceUrl) html += '<a href="' + cat.sourceUrl + '" target="_blank">View Listing</a>';
+              html += '</div></div>';
+            }
+            grid.innerHTML = html;
+          }
+
           loadBreeds();
+          loadCats();
         </script>
->>>>>>> Stashed changes
       </div>
     </div>
   </body>
