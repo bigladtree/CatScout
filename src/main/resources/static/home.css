@@ -101,6 +101,37 @@ body {
   font-size: 1.4vw;
   line-height: 1.7;
 }
+<<<<<<< Updated upstream
+=======
+
+/* filter bar */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em; 
+  align-items: center;
+  margin-top: 1%;
+  margin-bottom: 2%;
+}
+
+.filter-bar label {
+  font-size: 1.3vw;
+  font-weight: 600;
+}
+
+.filter-bar select {
+  font-size: 1.2vw;
+  padding: 0.3em 0.6em;
+  border: 2px solid #80c080;
+  border-radius: 5px;
+  margin-right: 1em;
+}
+
+body.dark .filter-bar select {
+  background-color: #2b2b2b;
+  color: #e0e0e0;
+  border-color: #4a7a4a;
+}
 
 /* Settings Page */
 .settings-group {
@@ -385,4 +416,73 @@ body.dark .collapsible-content {
   background-color: #3a3a3a;
   border-color: #4a7a4a;
   color: #e0e0e0;
+}
+>>>>>>> Stashed changes
+
+
+/* Cat Cards Grid */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+.cat-card {
+}
+
+.cat-card-img {
+  object-fit: cover;
+}
+
+.cat-card-img-placeholder {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e0e0e0;
+  color: #666;
+  font-size: 1.2vw;
+}
+
+.cat-card-info {
+
+}
+
+.cat-card-info h3 {
+
+}
+
+.cat-card-info p {
+
+}
+
+.cat-card-info a {
+
+}
+
+.loading-msg {
+
+}
+
+/* Dark mode cat cards */
+body.dark .cat-card {
+  background-color: #3a3a3a;
+  border-color: #4a7a4a;
+}
+
+body.dark .cat-card-info h3 {
+  color: #a0d8a0;
+}
+
+body.dark .cat-card-info p {
+  color: #ccc !important;
+}
+
+body.dark .cat-card-info a {
+  color: #6fcf7f;
+}
+
+body.dark .cat-card-img-placeholder {
+  background-color: #2b2b2b;
+  color: #888;
 }
