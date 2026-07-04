@@ -1,3 +1,4 @@
+
 package catscout.catscout.webscraper;
 
 public class CatListing {
