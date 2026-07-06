@@ -10,17 +10,21 @@ public class ShelterRegistry {
 
             new ShelterConfig("shelterluv", "14449", "Memphis Animal Services"),
             // https://memphisanimalservices.com/adopt/available-pets/cats-at-mas/
-            // 2782 might be code to filter for cats only at this shelter tbd
-            new ShelterConfig("shelterluv", "464", "Austin Pets Alive!"),
+            // saved_query=2781 is the "Cats at MAS" filter
+            new ShelterConfig("shelterluv", "APA", "Austin Pets Alive!"),
             // https://www.austinpetsalive.org/adopt/cats
-            new ShelterConfig("shelterluv", "12603", "Best Friends Animal Society"),
-            // https://bestfriends.org/adopt/adopt-our-sanctuary/cats
-            new ShelterConfig("shelterluv", "13324", "Jacksonville Humane Society"),
-            // https://jaxhumane.org/adopt/cats/
-            new ShelterConfig("shelterluv", "3827", "Lynchburg Humane Society"),
-            // https://lynchburghumane.org/animal-listing/cats/
-            new ShelterConfig("shelterluv", "12815", "Southern Pines Animal Shelter")
-    // https://www.southernpinesanimalshelter.org/spasdogs-294453.html
+            new ShelterConfig("shelterluv", "12815", "Southern Pines Animal Shelter"),
+            // https://www.southernpinesanimalshelter.org/spasdogs-294453.html
+            // https://www.shelterluv.com/embed/12815?
+            new ShelterConfig("shelterluv", "HST", "Humane Society of Tulsa"),
+            // https://www.shelterluv.com/matchme/adopt/HST/Cat
+            new ShelterConfig("shelterluv", "13324", "Jacksonville Humane Society")
+    // https://jaxhumane.org/adopt/cats/
+    // https://new.shelterluv.com/embed/13324?...
+
+    // new ShelterConfig("shelterluv", null, "Lynchburg Humane Society")
+    // use link instead of orgid
+    // https://lynchburghumane.org/animal-listing/cats/
 
     // and petpoint shelters
     // ex) new ShelterConfig("petpoint", "some-id", "Some Petpoint Shelter")
