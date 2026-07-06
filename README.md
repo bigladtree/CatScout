@@ -6,4 +6,5 @@ It can be overwhelming to be a first time pet owner. Our program is designed to 
 
 # How To Use
 MANUAL SET UP: Our project requires Java 26, spring-boot, and Maven 3.9.16. Then, with all these downloaded, go into the project terminal in whatever IDE you open it with and type in ".\mvnw spring-boot:run". After this launches (it will take a minute), go in your browser and go to localhost:8080. 
+
 EASY METHOD: Inside our project is a JAR file. You'll still need Java 26 to run it. in your command prompt, type java -jar {JAR FILES LOCATION}. In the project, it will be in the target folder, though you'll have to put the full route to it in. After you get it running (it will take a minute), go to your browser and go to localhost:8080. 
