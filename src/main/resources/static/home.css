@@ -101,3 +101,388 @@ body {
   font-size: 1.4vw;
   line-height: 1.7;
 }
+<<<<<<< Updated upstream
+=======
+
+/* filter bar */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em; 
+  align-items: center;
+  margin-top: 1%;
+  margin-bottom: 2%;
+}
+
+.filter-bar label {
+  font-size: 1.3vw;
+  font-weight: 600;
+}
+
+.filter-bar select {
+  font-size: 1.2vw;
+  padding: 0.3em 0.6em;
+  border: 2px solid #80c080;
+  border-radius: 5px;
+  margin-right: 1em;
+}
+
+body.dark .filter-bar select {
+  background-color: #2b2b2b;
+  color: #e0e0e0;
+  border-color: #4a7a4a;
+}
+
+/* Settings Page */
+.settings-group {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 2% 3%;
+  margin-bottom: 2%;
+}
+
+.settings-group-title {
+  font-size: 1.8vw;
+  font-weight: 600;
+  margin-bottom: 1%;
+  padding-bottom: 0.5%;
+  border-bottom: 2px solid #80c080;
+}
+
+.setting-item {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  margin-top: 1%;
+}
+
+.setting-label {
+  font-size: 1.4vw;
+}
+
+.setting-status {
+  font-size: 1.2vw;
+  margin-top: 0.5em;
+  color: #206040;
+  font-style: italic;
+}
+
+/* Toggle switch */
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 3.2em;
+  height: 1.8em;
+  cursor: pointer;
+}
+
+.toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  inset: 0;
+  background-color: #ccc;
+  border-radius: 1em;
+  transition: background-color 0.3s;
+}
+
+.toggle-slider::before {
+  content: "";
+  position: absolute;
+  width: 1.4em;
+  height: 1.4em;
+  left: 0.2em;
+  bottom: 0.2em;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+.toggle input:checked + .toggle-slider {
+  background-color: #206040;
+}
+
+.toggle input:checked + .toggle-slider::before {
+  transform: translateX(1.4em);
+}
+
+.toggle input:focus-visible + .toggle-slider {
+  outline: 2px solid #206040;
+  outline-offset: 2px;
+}
+
+/* Settings inputs & buttons */
+.settings-input {
+  font-size: 1.2vw;
+  padding: 0.5em 0.8em;
+  border: 2px solid #80c080;
+  border-radius: 6px;
+  outline: none;
+  width: 50%;
+}
+
+.settings-input:focus {
+  border-color: #206040;
+}
+
+.settings-btn {
+  font-size: 1.2vw;
+  padding: 0.5em 1.2em;
+  border: none;
+  border-radius: 6px;
+  background-color: #206040;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.settings-btn:hover {
+  background-color: #174a30;
+}
+
+.settings-btn.danger {
+  background-color: #c0392b;
+}
+
+.settings-btn.danger:hover {
+  background-color: #96281b;
+}
+
+.confirm-delete {
+  margin-top: 1em;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Links in main content */
+.main-content a {
+  color: #1a7a3a;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.main-content a:hover {
+  color: #145a2c;
+}
+
+.main-content a:visited {
+  color: #1a7a3a;
+}
+
+/* Dark Mode */
+body.dark .page {
+  background-color: #1a1a1a;
+}
+
+body.dark .main-content {
+  background-color: #2b2b2b;
+  color: #e0e0e0;
+}
+
+body.dark .main-content p,
+body.dark .main-content ul,
+body.dark .main-content li {
+  color: #e0e0e0;
+}
+
+body.dark .settings-group {
+  background-color: #3a3a3a;
+}
+
+body.dark .settings-group-title {
+  color: #a0d8a0;
+  border-bottom-color: #4a7a4a;
+}
+
+body.dark .setting-label {
+  color: #e0e0e0;
+}
+
+body.dark .settings-input {
+  background-color: #2b2b2b;
+  color: #e0e0e0;
+  border-color: #4a7a4a;
+}
+
+body.dark .sidebar {
+  background-color: #2d5a2d;
+}
+
+body.dark .nav-link {
+  color: #e0e0e0;
+  border-bottom-color: #1a3a1a;
+}
+
+body.dark .nav-link:hover {
+  background-color: #3a6a3a;
+}
+
+body.dark .header {
+  background-color: #143020;
+}
+
+body.dark .main-content a {
+  color: #6fcf7f;
+}
+
+body.dark .main-content a:hover {
+  color: #9fe0ab;
+}
+
+body.dark .main-content a:visited {
+  color: #6fcf7f;
+}
+
+/* Collapsible FAQ */
+.collapsible {
+  background-color: #ffffff;
+  color: #000000;
+  cursor: pointer;
+  padding: 1em 1.5em;
+  width: 100%;
+  border: 2px solid #80c080;
+  border-radius: 8px;
+  text-align: left;
+  outline: none;
+  font-size: 1.4vw;
+  font-weight: 600;
+  margin-top: 1em;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.collapsible::after {
+  content: "\25BC";
+  float: right;
+  font-size: 0.8em;
+  transition: transform 0.3s;
+}
+
+.collapsible.active::after {
+  transform: rotate(-180deg);
+}
+
+.collapsible:hover {
+  background-color: #e8f5e8;
+  border-color: #206040;
+}
+
+.collapsible.active {
+  background-color: #206040;
+  color: #ffffff;
+  border-color: #206040;
+  border-radius: 8px 8px 0 0;
+}
+
+/* Collapsible content panel */
+.collapsible-content {
+  padding: 1.2em 1.5em;
+  display: none;
+  overflow: hidden;
+  background-color: #ffffff;
+  border: 2px solid #80c080;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  margin-bottom: 0.5em;
+}
+
+/* Dark mode collapsible */
+body.dark .collapsible {
+  background-color: #3a3a3a;
+  color: #e0e0e0;
+  border-color: #4a7a4a;
+}
+
+body.dark .collapsible:hover {
+  background-color: #4a4a4a;
+  border-color: #6fcf7f;
+}
+
+body.dark .collapsible.active {
+  background-color: #206040;
+  color: #ffffff;
+  border-color: #206040;
+}
+
+body.dark .collapsible-content {
+  background-color: #3a3a3a;
+  border-color: #4a7a4a;
+  color: #e0e0e0;
+}
+>>>>>>> Stashed changes
+
+
+/* Cat Cards Grid */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+.cat-card {
+}
+
+.cat-card-img {
+  object-fit: cover;
+}
+
+.cat-card-img-placeholder {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e0e0e0;
+  color: #666;
+  font-size: 1.2vw;
+}
+
+.cat-card-info {
+
+}
+
+.cat-card-info h3 {
+
+}
+
+.cat-card-info p {
+
+}
+
+.cat-card-info a {
+
+}
+
+.loading-msg {
+
+}
+
+/* Dark mode cat cards */
+body.dark .cat-card {
+  background-color: #3a3a3a;
+  border-color: #4a7a4a;
+}
+
+body.dark .cat-card-info h3 {
+  color: #a0d8a0;
+}
+
+body.dark .cat-card-info p {
+  color: #ccc !important;
+}
+
+body.dark .cat-card-info a {
+  color: #6fcf7f;
+}
+
+body.dark .cat-card-img-placeholder {
+  background-color: #2b2b2b;
+  color: #888;
+}
