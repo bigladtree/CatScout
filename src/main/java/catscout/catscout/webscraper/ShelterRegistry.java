@@ -20,10 +20,12 @@ public class ShelterRegistry {
             // https://www.shelterluv.com/embed/12815?
             new ShelterConfig("shelterluv", "HST", "Humane Society of Tulsa"),
             // https://www.shelterluv.com/matchme/adopt/HST/Cat
-            new ShelterConfig("shelterluv", "13324", "Jacksonville Humane Society"),
+            new ShelterConfig("shelterluv", "13324", "Jacksonville Humane Society",
+                    "https://new.shelterluv.com/embed/"),
             // https://jaxhumane.org/adopt/cats/
             // https://new.shelterluv.com/embed/13324?...
-            new ShelterConfig("shelterluv", "100000846", "The Anti-Cruelty Society"),
+            new ShelterConfig("shelterluv", "100000846", "The Anti-Cruelty Society",
+                    "https://new.shelterluv.com/embed/"),
             // https://new.shelterluv.com/embed/100000846
 
             // new ShelterConfig("shelterluv", "NVHS", "Nevada Humane Society")
@@ -43,6 +45,9 @@ public class ShelterRegistry {
 
     );
 
-    public record ShelterConfig(String platform, String shelterId, String shelterName) {
+    public record ShelterConfig(String platform, String shelterId, String shelterName, String baseUrl) {
+        public ShelterConfig(String platform, String shelterId, String shelterName) {
+            this(platform, shelterId, shelterName, null);
+        }
     }
 }

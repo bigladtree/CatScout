@@ -33,7 +33,7 @@ public class ScraperManager {
 
             System.out.println("Scraping: " + shelter.shelterName() + " (" + shelter.platform() + ")");
             try {
-                List<CatListing> cats = scraper.scrape(shelter.shelterId());
+                List<CatListing> cats = scraper.scrape(shelter.shelterId(), shelter.baseUrl());
 
                 // stamp each cat with the shelter name since scraper only knows the ID
                 cats.forEach(cat -> cat.setSourceShelter(shelter.shelterName()));
