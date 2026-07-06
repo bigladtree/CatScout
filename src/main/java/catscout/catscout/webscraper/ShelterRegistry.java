@@ -6,6 +6,7 @@ public class ShelterRegistry {
 
     // each entry is: platform, shelterId, display name
     public static final List<ShelterConfig> SHELTERS = List.of(
+
             // shelterluv shelters
             new ShelterConfig("shelterluv", "1863", "Because You Care"),
 
@@ -22,23 +23,23 @@ public class ShelterRegistry {
             new ShelterConfig("shelterluv", "13324", "Jacksonville Humane Society"),
             // https://jaxhumane.org/adopt/cats/
             // https://new.shelterluv.com/embed/13324?...
-            new ShelterConfig("shelterluv", "100000846", "The Anti-Cruelty Society")
-    // https://new.shelterluv.com/embed/100000846
+            new ShelterConfig("shelterluv", "100000846", "The Anti-Cruelty Society"),
+            // https://new.shelterluv.com/embed/100000846
 
-    // new ShelterConfig("shelterluv", "NVHS", "Nevada Humane Society")
-    // can be parsed through jsoup - make sure scanner is able to read first
+            // new ShelterConfig("shelterluv", "NVHS", "Nevada Humane Society")
+            // can be parsed through jsoup - make sure scanner is able to read first
 
-    // new ShelterConfig("shelterluv", null, "Lynchburg Humane Society")
-    // use link instead of orgid
-    // https://lynchburghumane.org/animal-listing/cats/
+            // new ShelterConfig("shelterluv", null, "Lynchburg Humane Society")
+            // use link instead of orgid
+            // https://lynchburghumane.org/animal-listing/cats/
 
-    // petango shelters
-    // ex) new ShelterConfig("petango", "some-id", "Some Petango Shelter")
+            // petango shelters
+            // ex) new ShelterConfig("petango", "some-id", "Some Petango Shelter")
 
-    // new ShelterConfig("petango",
-    // "htr0d8cmdxn6kjq4i3brxlvgmx8e610khmut6wkjxayue3rdff", "Williamson County
-    // Regional Animal Shelter")
-    // can be parsed through jsoup - make sure scanner is able to read first
+            // https://www.wilcotx.gov/164/Adopt
+            new ShelterConfig("petango", "htr0d8cmdxn6kjq4i3brxlvgmx8e610khmut6wkjxayue3rdff",
+                    "Williamson County Regional Animal Shelter")
+    // can be parsed through jsoup alone
 
     );
 
