@@ -106,7 +106,7 @@ public class ShelterluvScraper implements ShelterScraper {
             return pet;
 
         } catch (Exception e) {
-            System.err.println("Failed scraping " + url + ": " + e.getMessage());
+            System.err.println("Failed to scrape cat profile " + url + ": " + e.getMessage());
             return null;
         }
     }
