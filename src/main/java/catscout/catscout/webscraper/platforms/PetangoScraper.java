@@ -11,6 +11,7 @@ import java.net.URI;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,21 +48,23 @@ public class PetangoScraper implements ShelterScraper {
     private List<CatListing> scrapeListingPage(String authKey) {
         List<CatListing> listings = new ArrayList<>();
         try {
-            String url = buildUrl(LISTING_URL, Map.of(
-                    "species", "Cat",
-                    "sex", "A",
-                    "agegroup", "All",
-                    "location", "",
-                    "site", "",
-                    "onhold", "A",
-                    "orderby", "ID",
-                    "colnum", "4",
-                    "css", CSS,
-                    "authkey", authKey,
-                    "recAmount", "",
-                    "detailsInPopup", "Yes",
-                    "featuredPet", "Include",
-                    "stageID", ""));
+            Map<String, String> params = new LinkedHashMap<>();
+            params.put("species", "Cat");
+            params.put("sex", "A");
+            params.put("agegroup", "All");
+            params.put("location", "");
+            params.put("site", "");
+            params.put("onhold", "A");
+            params.put("orderby", "ID");
+            params.put("colnum", "4");
+            params.put("css", CSS);
+            params.put("authkey", authKey);
+            params.put("recAmount", "");
+            params.put("detailsInPopup", "Yes");
+            params.put("featuredPet", "Include");
+            params.put("stageID", "");
+
+            String url = buildUrl(LISTING_URL, params);
 
             Document doc = Jsoup.connect(url)
                     .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
@@ -87,11 +90,12 @@ public class PetangoScraper implements ShelterScraper {
                 if (link != null) {
                     String href = link.attr("href");
                     String animalId = href.replaceAll(".*id=(\\d+).*", "$1");
-                    String detailUrl = buildUrl(DETAIL_URL, Map.of(
-                            "id", animalId,
-                            "css", CSS,
-                            "authkey", authKey,
-                            "PopUp", "true"));
+                    Map<String, String> detailParams = new LinkedHashMap<>();
+                    detailParams.put("id", animalId);
+                    detailParams.put("css", CSS);
+                    detailParams.put("authkey", authKey);
+                    detailParams.put("PopUp", "true");
+                    String detailUrl = buildUrl(DETAIL_URL, detailParams);
                     pet.setSourceUrl(detailUrl);
                 }
 
