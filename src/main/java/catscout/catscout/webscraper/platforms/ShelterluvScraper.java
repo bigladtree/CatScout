@@ -4,7 +4,11 @@ import java.net.URI;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
@@ -22,47 +26,67 @@ import catscout.catscout.webscraper.ShelterScraper;
 public class ShelterluvScraper implements ShelterScraper {
 
     private static final String BASE_URL = "https://www.shelterluv.com/embed";
+    private static final int THREAD_COUNT = 5;
 
     @Override
     public List<CatListing> scrape(String orgId, String baseUrl) {
-        List<CatListing> results = new ArrayList<>();
+        List<CatListing> results = Collections.synchronizedList(new ArrayList<>());
 
         try (Playwright playwright = Playwright.create()) {
             Browser browser = playwright.chromium().launch(
                     new BrowserType.LaunchOptions().setHeadless(true));
-            BrowserContext context = browser.newContext();
-            Page page = context.newPage();
 
+            // Step 1: listing page is still single threaded (fast, only one page)
+            BrowserContext listingContext = browser.newContext();
+            Page listingPage = listingContext.newPage();
+            List<String> animalUrls;
             try {
-                List<String> animalUrls = scrapeListingPage(page, orgId, baseUrl);
+                animalUrls = scrapeListingPage(listingPage, orgId, baseUrl);
                 System.out.println("Found " + animalUrls.size() + " animals for org " + orgId);
-
-                for (String url : animalUrls) {
-                    CatListing cat = scrapeProfile(page, url, orgId);
-                    if (cat != null) {
-                        results.add(cat);
-                    }
-                }
-
-                System.out.println("Total scraped for org " + orgId + ": " + results.size());
-                return results;
             } finally {
-                page.close();
-                context.close();
-                browser.close();
+                listingPage.close();
+                listingContext.close();
             }
+
+            // Step 2: scrape profiles in parallel
+            // each thread gets its own BrowserContext and Page — never share a Page across threads
+            ExecutorService executor = Executors.newFixedThreadPool(THREAD_COUNT);
+
+            for (String url : animalUrls) {
+                executor.submit(() -> {
+                    BrowserContext context = browser.newContext();
+                    Page page = context.newPage();
+                    try {
+                        CatListing cat = scrapeProfile(page, url, orgId);
+                        if (cat != null) {
+                            results.add(cat);
+                            System.out.println("Scraped: " + cat.getName());
+                        }
+                    } finally {
+                        page.close();
+                        context.close();
+                    }
+                });
+            }
+
+            // wait for all threads to finish before closing the browser
+            executor.shutdown();
+            executor.awaitTermination(10, TimeUnit.MINUTES);
+            browser.close();
+
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
+
+        System.out.println("Total scraped for org " + orgId + ": " + results.size());
+        return results;
     }
 
-    /**
-     * Fetches and parses a single animal profile page.
-     * Returns null if the animal is not a cat, not adoptable, or the page doesn't
-     * exist.
-     */
+    // ---- everything below this line is completely unchanged ----
+
     private CatListing scrapeProfile(Page page, String url, String orgId) {
         try {
             page.navigate(url);
-            // wait for the name to appear, confirming the page loaded
             page.waitForSelector("h1.text-2xl",
                     new Page.WaitForSelectorOptions().setTimeout(15000));
 
@@ -114,11 +138,6 @@ public class ShelterluvScraper implements ShelterScraper {
         }
     }
 
-    /**
-     * Extracts the value between a start label and one of the end labels from a
-     * flat text block.
-     *
-     */
     private List<String> scrapeListingPage(Page page, String orgId, String baseUrl) {
         List<String> urls = new ArrayList<>();
 
