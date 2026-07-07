@@ -14,12 +14,12 @@ public class ShelterRegistry {
             new ShelterConfig("shelterluv", "14449", "Memphis Animal Services", null, "Memphis, TN"),
             // https://memphisanimalservices.com/adopt/available-pets/cats-at-mas/
             // saved_query=2781 is the "Cats at MAS" filter
-            new ShelterConfig("shelterluv", "APA", "Austin Pets Alive!", null, "Austin, TX"),
+            //new ShelterConfig("shelterluv", "APA", "Austin Pets Alive!", null, "Austin, TX"),
             // https://www.austinpetsalive.org/adopt/cats
             new ShelterConfig("shelterluv", "12815", "Southern Pines Animal Shelter", null, "Southern Pines, NC"),
             // https://www.southernpinesanimalshelter.org/spasdogs-294453.html
             // https://www.shelterluv.com/embed/12815?
-            new ShelterConfig("shelterluv", "HST", "Humane Society of Tulsa", null, "Tulsa, OK"),
+            //new ShelterConfig("shelterluv", "HST", "Humane Society of Tulsa", null, "Tulsa, OK"),
             // https://www.shelterluv.com/matchme/adopt/HST/Cat
             new ShelterConfig("shelterluv", "13324", "Jacksonville Humane Society",
                     "https://new.shelterluv.com/embed/", "Jacksonville, FL"),
