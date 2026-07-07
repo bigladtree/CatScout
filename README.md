@@ -10,7 +10,8 @@ The explore page does take time to load! Give it around 5 minutes, they'll appea
 # How To Use
 MANUAL SET UP: Our project requires Java 26, spring-boot, and Maven 3.9.16. Then, with all these downloaded, go into the project terminal in whatever IDE you open it with and type in ".\mvnw spring-boot:run". After this launches (it will take a minute), go in your browser and go to localhost:8080. 
 
-EASY METHOD: Inside our project is a JAR file. You'll still need Java 26 to run it. in your command prompt, type java -jar {JAR FILES LOCATION}. In the project, it will be in the target folder, though you'll have to put the full route to it in (C:\blahblahblah\target\\catscout-0.0.1-SNAPSHOT.jar). After you get it running (it will take a minute), go to your browser and go to localhost:8080. 
+Java 26 - https://www.oracle.com/java/technologies/downloads/
+Maven 3.9.16 - https://maven.apache.org/download.cgi
 
 # REFLECTION - Plans We Never Got To
 Filter System - initially, we were going to have a filter system to allow an easy way for the user to narrow down results. We didn't have time to do this and, with how the scraper is built, we didn't know how to efficiently achieve this goal.
