@@ -37,11 +37,6 @@
                 <span class="toggle-slider"></span>
               </label>
             </div>
-            <div class ="setting-item">
-              <span class ="setting-label">Location</span>
-              <input type="text" id="locationInput" class="settings-input" placeholder="Enter Zip Code">
-              <button id="saveLocation" class="settings-btn">Save</button>
-            </div>
           </section>
 
         </main>
@@ -58,18 +53,6 @@
             document.body.classList.toggle('dark', darkToggle.checked);
             save('darkMode', darkToggle.checked);
           };
-
-          //Location
-          //Checks if a location is already saved. prefills input if yes.
-          const locationInput = $('locationInput');
-          locationInput.value = localStorage.getItem('userLocation') || '';
-
-          //input change/save button hit? change locationInput value.
-          $('saveLocation').onclick = () => {
-            save('userLocation', locationInput.value.trim());
-          };
-
-
 
         </script>
       </div>
