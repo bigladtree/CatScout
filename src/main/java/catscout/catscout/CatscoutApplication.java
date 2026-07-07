@@ -7,7 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import catscout.catscout.webscraper.CatListing;
-import catscout.catscout.webscraper.platforms.ShelterluvScraper;
+import catscout.catscout.webscraper.ScraperManager;
 
 @SpringBootApplication
 public class CatscoutApplication {
@@ -32,8 +32,8 @@ public class CatscoutApplication {
 	}
 
 	private static void runScrapeDemo(String orgId) {
-		ShelterluvScraper scraper = new ShelterluvScraper();
-		List<CatListing> cats = scraper.scrape(orgId);
+		ScraperManager scraperManager = new ScraperManager();
+		List<CatListing> cats = scraperManager.scrapeAll(orgId);
 
 		System.out.println("===== RESULTS =====");
 		System.out.println("Total cats found: " + cats.size());
