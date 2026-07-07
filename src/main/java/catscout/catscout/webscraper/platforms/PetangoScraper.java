@@ -31,15 +31,9 @@ public class PetangoScraper implements ShelterScraper {
 
         // Step 2: enrich each with detail page data
         for (CatListing basic : basicListings) {
-            try {
-                Thread.sleep(300);
-                enrichFromDetailPage(basic, authKey);
-                results.add(basic);
-                System.out.println("Scraped: " + basic.getName());
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                break;
-            }
+            enrichFromDetailPage(basic, authKey);
+            results.add(basic);
+            System.out.println("Scraped: " + basic.getName());
         }
 
         return results;
@@ -68,7 +62,7 @@ public class PetangoScraper implements ShelterScraper {
 
             Document doc = Jsoup.connect(url)
                     .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
-                    .timeout(10000)
+                    .timeout(100)
                     .get();
 
             // each animal card has class list-animal-info-block
@@ -113,7 +107,7 @@ public class PetangoScraper implements ShelterScraper {
         try {
             Document doc = Jsoup.connect(pet.getSourceUrl())
                     .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
-                    .timeout(10000)
+                    .timeout(100)
                     .get();
 
             // photo — the main animal photo
