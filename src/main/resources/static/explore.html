@@ -58,26 +58,12 @@
               <option value ="male">Male</option>
               <option value ="female">Female</option>
             </select>
-
-            <label for="color">Color</label>
-            <select name ="color" id="color">
-              <option value="">Any</option>
-              <option value="black">Black</option>
-              <option value="brown">Brown</option>
-              <option value="orange">Orange</option>
-              <option value="white">White</option>
-              <option value="gray">Gray</option>
-              <option value="hairless">Hairless</option>
-              <option value="calico">Calico</option>
-              <option value="bicolor">Bicolor</option>
-            </select>
           </div>
 
           <!-- cat cards grid -->
           <div id="catGrid" class="cat-grid">
             <p class="loading-msg">Loading cats...</p>
           </div>
-        </main>
 
         <script>
           // dark mode check
@@ -136,7 +122,7 @@
               var cat = cats[i];
               html += '<div class="cat-card">';
               if (cat.photoUrl) {
-                html += '<img class="cat-card-img" src="' + cat.photoUrl + '" alt="Photo of ' + cat.name + '">';
+                html += '<div class="cat-card-img-wrapper"><img class="cat-card-img" src="' + cat.photoUrl + '" alt="Photo of ' + cat.name + '"></div>';
               } else {
                 html += '<div class="cat-card-img-placeholder">No Photo</div>';
               }
@@ -151,9 +137,17 @@
             grid.innerHTML = html;
           }
 
+          //filters
+
+          //age
+
+          //gneder
+
+          //breed
           loadBreeds();
           loadCats();
         </script>
+        </main>
       </div>
     </div>
   </body>
