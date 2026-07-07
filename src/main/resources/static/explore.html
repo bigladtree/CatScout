@@ -33,33 +33,6 @@
             narrow down your search.
           </p>
 
-          <!-- filters-->
-          <div class ="filter-bar">
-            <!--age filter-->
-            <label for="age">Age</label>
-            <select name ="age" id ="age">
-              <option value ="">Any</option>
-              <option value ="kitten">Kitten</option>
-              <option value ="adult">Adult</option>
-              <option value="mature">Mature Adult</option>
-              <option value ="senior">Senior</option>
-            </select>
-
-            <!--breed filter - pulls from api-->
-            <label for="breed">Breed</label>
-            <select name="breed" id="breed">
-              <option value="">Loading...</option>
-            </select>
-
-            <!--sex filter-->
-            <label for="sex">Sex</label>
-            <select name ="sex" id ="sex">
-              <option value="">Any</option>
-              <option value ="male">Male</option>
-              <option value ="female">Female</option>
-            </select>
-          </div>
-
           <!-- cat cards grid -->
           <div id="catGrid" class="cat-grid">
             <p class="loading-msg">Loading cats...</p>
@@ -70,27 +43,6 @@
           if (localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark');
 
           var allCats = [];
-
-          //pull breed list directly from the cat api
-          function loadBreeds() {
-            var breedSelect = document.getElementById('breed');
-
-            fetch('https://api.thecatapi.com/v1/breeds')
-              .then(function(res) { return res.json(); })
-              .then(function(breeds) {
-                breedSelect.innerHTML = '<option value="">Any Breed</option>';
-                for (var i = 0; i < breeds.length; i++) {
-                  var opt = document.createElement('option');
-                  opt.value = breeds[i].name.toLowerCase();
-                  opt.textContent = breeds[i].name;
-                  breedSelect.appendChild(opt);
-                }
-              })
-              .catch(function(err) {
-                console.error('Could not load breeds:', err);
-                breedSelect.innerHTML = '<option value="">Could not load breeds</option>';
-              });
-          }
 
           // fetch cats from scraper
           function loadCats() {
@@ -108,43 +60,47 @@
               });
           }
 
-          // render cat cards into the grid
+          //save button!!\
+          function saveCat(index) {
+            var saved = JSON.parse(localStorage.getItem('savedCats') || '[]');
+            var cat = allCats[index];
+            if (!saved.some(function(s) { return s.name === cat.name && s.sourceUrl === cat.sourceUrl; })) {
+              saved.push(cat);
+              localStorage.setItem('savedCats', JSON.stringify(saved));
+            }
+            renderCats(allCats);
+          }
+
+          //get cats on screen!
           function renderCats(cats) {
             var grid = document.getElementById('catGrid');
-
-            if (cats.length === 0) {
-              grid.innerHTML = '<p>No cats match your filters.</p>';
-              return;
-            }
-
+            if (cats.length === 0) { grid.innerHTML = '<p>No cats match your filters.</p>'; return; }
+            
+            //gets saved cats out of memory so it can make the save button already pressed
+            var saved = JSON.parse(localStorage.getItem('savedCats') || '[]');
             var html = '';
+
+            //loops through each cat to print their respective little card
             for (var i = 0; i < cats.length; i++) {
               var cat = cats[i];
+              var isSaved = saved.some(function(s) { return s.name === cat.name && s.sourceUrl === cat.sourceUrl; });
               html += '<div class="cat-card">';
-              if (cat.photoUrl) {
-                html += '<div class="cat-card-img-wrapper"><img class="cat-card-img" src="' + cat.photoUrl + '" alt="Photo of ' + cat.name + '"></div>';
-              } else {
-                html += '<div class="cat-card-img-placeholder">No Photo</div>';
-              }
+              html += cat.photoUrl
+                ? '<div class="cat-card-img-wrapper"><img class="cat-card-img" src="' + cat.photoUrl + '" alt="' + cat.name + '"></div>'
+                : '<div class="cat-card-img-placeholder">No Photo</div>';
               html += '<div class="cat-card-info">';
               html += '<h3 class="cat-card-name">' + cat.name + '</h3>';
               html += '<p>' + (cat.breed || 'Unknown breed') + '</p>';
               html += '<p>' + (cat.age || '') + ' &middot; ' + (cat.sex || '') + '</p>';
               if (cat.adoptionFee) html += '<p>Fee: ' + cat.adoptionFee + '</p>';
+              html += isSaved
+                ? '<button class="save-btn saved" disabled>Saved</button><br>'
+                : '<button class="save-btn" onclick="saveCat(' + i + ')">Save</button><br>';
               if (cat.sourceUrl) html += '<a href="' + cat.sourceUrl + '" target="_blank">View Listing</a>';
               html += '</div></div>';
             }
             grid.innerHTML = html;
           }
-
-          //filters
-
-          //age
-
-          //gneder
-
-          //breed
-          loadBreeds();
           loadCats();
         </script>
         </main>

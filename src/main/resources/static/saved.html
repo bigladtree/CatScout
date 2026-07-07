@@ -29,77 +29,57 @@
 
           <p>
             This is where the kitties you save for later go. All their info will be here.
-            If a kitty you've saved gets adopted, it will get grayed out.
           </p>
 
-          <!-- filters-->
-          <div class ="filter-bar">
-            <!--age filter-->
-            <label for="age">Age</label>
-            <select name ="age" id ="age">
-              <option value ="">Any</option>
-              <option value ="kitten">Kitten</option>
-              <option value ="adult">Adult</option>
-              <option value="mature">Mature Adult</option>
-              <option value ="senior">Senior</option>
-            </select>
-
-            <!--breed filter - pulls from api-->
-            <label for="breed">Breed</label>
-            <select name="breed" id="breed">
-              <option value="">Loading...</option>
-            </select>
-
-            <!--sex filter-->
-            <label for="sex">Sex</label>
-            <select name ="sex" id ="sex">
-              <option value="">Any</option>
-              <option value ="male">Male</option>
-              <option value ="female">Female</option>
-            </select>
-
-            <label for="color">Color</label>
-            <select name ="color" id="color">
-              <option value="">Any</option>
-              <option value="black">Black</option>
-              <option value="brown">Brown</option>
-              <option value="orange">Orange</option>
-              <option value="white">White</option>
-              <option value="gray">Gray</option>
-              <option value="hairless">Hairless</option>
-              <option value="calico">Calico</option>
-              <option value="bicolor">Bicolor</option>
-            </select>
+          <!-- saved cat cards grid -->
+          <div id="savedGrid" class="cat-grid">
           </div>
-        </main>
 
         <script>
-          // dark mode check
+          //dark mode check
           if (localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark');
 
-          //pull breed list directly from the cat api
-          function loadBreeds() {
-            var breedSelect = document.getElementById('breed');
-
-            fetch('https://api.thecatapi.com/v1/breeds')
-              .then(function(res) { return res.json(); })
-              .then(function(breeds) {
-                breedSelect.innerHTML = '<option value="">Any Breed</option>';
-                for (var i = 0; i < breeds.length; i++) {
-                  var opt = document.createElement('option');
-                  opt.value = breeds[i].id;
-                  opt.textContent = breeds[i].name;
-                  breedSelect.appendChild(opt);
-                }
-              })
-              .catch(function(err) {
-                console.error('Could not load breeds:', err);
-                breedSelect.innerHTML = '<option value="">Could not load breeds</option>';
-              });
+          //removes cats from saved.
+          function removeCat(index) {
+            var saved = JSON.parse(localStorage.getItem('savedCats') || '[]');
+            saved.splice(index, 1);
+            localStorage.setItem('savedCats', JSON.stringify(saved));
+            renderSaved();
           }
 
-          loadBreeds();
+          //puts em on screen!!
+          function renderSaved() {
+            var grid = document.getElementById('savedGrid');
+            var cats = JSON.parse(localStorage.getItem('savedCats') || '[]');
+
+            if (cats.length === 0) {
+              grid.innerHTML = '<p>No saved cats yet.</p>';
+              return;
+            }
+
+            var html = '';
+            //loops through saved cats and creates their cards
+            for (var i = 0; i < cats.length; i++) {
+              var cat = cats[i];
+              html += '<div class="cat-card">';
+              html += cat.photoUrl
+                ? '<div class="cat-card-img-wrapper"><img class="cat-card-img" src="' + cat.photoUrl + '" alt="' + cat.name + '"></div>'
+                : '<div class="cat-card-img-placeholder">No Photo</div>';
+              html += '<div class="cat-card-info">';
+              html += '<h3 class="cat-card-name">' + cat.name + '</h3>';
+              html += '<p>' + (cat.breed || 'Unknown breed') + '</p>';
+              html += '<p>' + (cat.age || '') + ' &middot; ' + (cat.sex || '') + '</p>';
+              if (cat.adoptionFee) html += '<p>Fee: ' + cat.adoptionFee + '</p>';
+              html += '<button class="save-btn saved" onclick="removeCat(' + i + ')">Remove</button><br>';
+              if (cat.sourceUrl) html += '<a href="' + cat.sourceUrl + '" target="_blank">View Listing</a>';
+              html += '</div></div>';
+            }
+            grid.innerHTML = html;
+          }
+
+          renderSaved();
         </script>
+        </main>
       </div>
     </div>
   </body>

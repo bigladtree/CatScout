@@ -1,12 +1,12 @@
 package catscout.catscout.webscraper;
 
-import catscout.catscout.webscraper.platforms.PetangoScraper;
-import catscout.catscout.webscraper.platforms.ShelterluvScraper;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import catscout.catscout.webscraper.platforms.PetangoScraper;
+import catscout.catscout.webscraper.platforms.ShelterluvScraper;
 
 public class ScraperManager {
 

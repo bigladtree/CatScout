@@ -1,12 +1,13 @@
 package catscout.catscout;
 
-import catscout.catscout.webscraper.CatListing;
-import catscout.catscout.webscraper.ScraperManager;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import catscout.catscout.webscraper.CatListing;
+import catscout.catscout.webscraper.ScraperManager;
 
 @RestController
 public class CatListingController {
