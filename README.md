@@ -25,3 +25,6 @@ EXPLORE, Kitty Scraper - Probably the most complicated part of our project, our 
 Save System - Implemented by Chris, the saving system allows users to save cats they see and these saved cats will stay between uses (so long as it's in the same browser). The system saves the cats information to localStorage so it persists between sessions.
 
 New Owners Information - Implemented by Chris, although this section is probably the easiest coded one, it just being html for the most part, we felt it very important to include. The scariest aspect of adopting a new pet is not knowing how to take care of them/introduce them properly. We made sure to format it in a way that is easy to come back to and very easy to digest. 
+
+# VIDEO LINK
+https://youtu.be/lC49UGwIz7E
